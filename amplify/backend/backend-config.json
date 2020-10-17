@@ -1,0 +1,10 @@
+{
+  "auth": {
+    "funwithmath1241a2cf": {
+      "service": "Cognito",
+      "providerPlugin": "awscloudformation",
+      "dependsOn": [],
+      "customAuth": false
+    }
+  }
+}
