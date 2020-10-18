@@ -1,9 +1,9 @@
 import * as React from 'react';
 import renderer from 'react-test-renderer';
 
-import AuthOptions from '../AuthOptions';
+import AuthOptions from './AuthOptions';
 
-describe('AuthOptions component', () => {
+describe('<AuthOptions />', () => {
   const showRegister = jest.fn();
   const showLogin = jest.fn();
   const showForgetPassword = jest.fn();

@@ -3,7 +3,6 @@ import { StyleSheet } from 'react-native';
 import { Button, Text } from 'native-base';
 import Auth from '@aws-amplify/auth';
 
-import EditScreenInfo from '../components/EditScreenInfo';
 import { View } from '../components/Themed';
 
 interface Props {
@@ -25,7 +24,6 @@ const TabTwoScreen = ({ navigation }: Props) => {
     <View style={styles.container}>
       <Text style={styles.title}>Tab Two</Text>
       <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
-      <EditScreenInfo path="/screens/TabTwoScreen.js" />
       <Button full onPress={logout}>
         <Text>Logout</Text>
       </Button>

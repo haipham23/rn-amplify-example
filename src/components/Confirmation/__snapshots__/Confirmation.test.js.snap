@@ -1,0 +1,182 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Confirmation /> should render 1`] = `
+<View
+  style={
+    Object {
+      "padding": 10,
+    }
+  }
+>
+  <Text
+    style={
+      Object {
+        "color": "#000",
+        "fontFamily": "System",
+        "fontSize": 16,
+      }
+    }
+    uppercase={false}
+  >
+    Code was sent to your email at test@example.com.
+  </Text>
+  <View
+    style={Object {}}
+  >
+    <View
+      accessible={true}
+      focusable={false}
+      forwardedRef={[Function]}
+      onClick={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Object {
+          "alignItems": "center",
+          "backgroundColor": "transparent",
+          "borderBottomWidth": 1,
+          "borderColor": "#D9D5DC",
+          "borderLeftWidth": 0,
+          "borderRadius": undefined,
+          "borderRightWidth": 0,
+          "borderTopWidth": 0,
+          "borderWidth": undefined,
+          "flexDirection": "row",
+          "marginLeft": 0,
+          "marginTop": 15,
+          "opacity": 1,
+          "paddingLeft": 15,
+        }
+      }
+    >
+      <View
+        style={
+          Object {
+            "left": 15,
+            "opacity": 1,
+            "paddingBottom": undefined,
+            "paddingTop": undefined,
+            "position": "absolute",
+            "right": 0,
+            "top": 18,
+          }
+        }
+      >
+        <Text
+          style={
+            Object {
+              "color": "#575757",
+              "fontSize": 17,
+              "left": 0,
+              "paddingRight": 5,
+              "paddingTop": 5,
+              "top": 6,
+            }
+          }
+        >
+          <Text
+            float={true}
+            style={
+              Array [
+                Object {
+                  "fontSize": 17,
+                },
+                Object {
+                  "fontSize": 15,
+                  "lineHeight": 30,
+                },
+              ]
+            }
+          />
+        </Text>
+      </View>
+      <TextInput
+        allowFontScaling={true}
+        editable={true}
+        onBlur={[Function]}
+        onChangeText={[Function]}
+        onFocus={[Function]}
+        placeholder="Confirmation code"
+        placeholderTextColor="#575757"
+        rejectResponderTermination={true}
+        style={
+          Object {
+            "color": "#000",
+            "flex": 1,
+            "fontSize": 17,
+            "height": 50,
+            "marginLeft": null,
+            "paddingBottom": 7,
+            "paddingLeft": null,
+            "paddingRight": 5,
+            "paddingTop": 3,
+            "top": 10,
+          }
+        }
+        underlineColorAndroid="rgba(0,0,0,0)"
+        value="111111"
+      />
+    </View>
+    <View
+      accessible={true}
+      focusable={true}
+      forwardedRef={[Function]}
+      onClick={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Object {
+          "alignItems": "center",
+          "alignSelf": "stretch",
+          "backgroundColor": "#007aff",
+          "borderBottomWidth": null,
+          "borderColor": "#007aff",
+          "borderLeftWidth": null,
+          "borderRadius": 0,
+          "borderRightWidth": null,
+          "borderTopWidth": null,
+          "borderWidth": undefined,
+          "elevation": 2,
+          "flexDirection": "row",
+          "height": 45,
+          "justifyContent": "center",
+          "marginVertical": 40,
+          "opacity": 1,
+          "paddingBottom": 6,
+          "paddingTop": 6,
+          "shadowColor": undefined,
+          "shadowOffset": undefined,
+          "shadowOpacity": undefined,
+          "shadowRadius": undefined,
+        }
+      }
+    >
+      <Text
+        style={
+          Object {
+            "backgroundColor": "transparent",
+            "color": "#fff",
+            "fontFamily": "System",
+            "fontSize": 16.5,
+            "marginLeft": 0,
+            "marginRight": 0,
+            "paddingLeft": 16,
+            "paddingRight": 16,
+          }
+        }
+        uppercase={false}
+      >
+        Confirm
+      </Text>
+    </View>
+  </View>
+</View>
+`;
