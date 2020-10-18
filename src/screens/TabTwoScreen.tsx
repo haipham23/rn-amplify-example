@@ -7,35 +7,37 @@ import { useFocusEffect } from '@react-navigation/native';
 import { View } from '../components/Themed';
 import Loader from '../components/Loader';
 
+import FormStates from '../constants/FormStates';
+
 interface Props {
   navigation: any;
 }
 
 const TabTwoScreen = ({ navigation }: Props) => {
-  const [formState, setFormState] = React.useState<string>('empty');
+  const [formState, setFormState] = React.useState<string>(FormStates.empty);
 
   const onScreenFocus = React.useCallback(() => {
     const navigateIfAuth = async () => {
-      setFormState('loading');
+      setFormState(FormStates.loading);
 
       try {
         const user = await Auth.currentAuthenticatedUser();
 
         if (!user) {
-          navigation.navigate('TabOne');
+          navigation.navigate('Auth');
           return;
         }
 
-        setFormState('active');
+        setFormState(FormStates.active);
       } catch (e) {
         // logged out
-        navigation.navigate('TabOne');
+        navigation.navigate('Auth');
       }
     };
 
     navigateIfAuth();
 
-    return () => setFormState('empty');
+    return () => setFormState(FormStates.empty);
   }, []);
 
   const logout = async () => {
@@ -44,23 +46,23 @@ const TabTwoScreen = ({ navigation }: Props) => {
     } catch (e) {
       // do nothing
     } finally {
-      navigation.navigate('TabOne');
+      navigation.navigate('Auth');
     }
   };
 
   useFocusEffect(onScreenFocus);
 
-  if (formState === 'empty') {
+  if (formState === FormStates.empty) {
     return null;
   }
 
-  if (formState === 'loading') {
+  if (formState === FormStates.login) {
     return <Loader />;
   }
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Tab Two</Text>
+      <Text style={styles.title}>Authenticated screen</Text>
       <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
       <Button full onPress={logout}>
         <Text>Logout</Text>

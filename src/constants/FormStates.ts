@@ -5,5 +5,6 @@ export default {
   login: 'LOGIN',
   confirm: 'CONFIRM',
   newPassword: 'NEW_PASSWORD',
-  forgotPassword: 'FORGOT_PASSWORD'
+  forgotPassword: 'FORGOT_PASSWORD',
+  active: 'ACTIVE'
 };

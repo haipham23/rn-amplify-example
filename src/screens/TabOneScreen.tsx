@@ -106,7 +106,7 @@ const TabOneScreen = ({ navigation }: Props) => {
       await Auth.signIn(form.username, form.password);
       setForm(initialForm);
 
-      navigation.navigate('TabTwo');
+      navigation.navigate('Main');
     } catch (e) {
       console.log(e);
     } finally {
@@ -137,7 +137,7 @@ const TabOneScreen = ({ navigation }: Props) => {
       );
 
       setForm(initialForm);
-      setFormState('login');
+      setFormState(FormStates.login);
     } catch (e) {
       console.log(e);
       setFormState(FormStates.forgotPassword);
