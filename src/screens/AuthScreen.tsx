@@ -35,7 +35,7 @@ const initialForm = {
   newPassword: ''
 };
 
-const TabOneScreen = ({ navigation }: Props) => {
+const AuthScreen = ({ navigation }: Props) => {
   const [form, setForm] = React.useState<IForm>(initialForm);
   const [formState, setFormState] = React.useState<string>('empty');
 
@@ -47,7 +47,7 @@ const TabOneScreen = ({ navigation }: Props) => {
         const user = await Auth.currentAuthenticatedUser();
 
         if (user) {
-          navigation.navigate('TabTwo');
+          navigation.replace('Root');
           return;
         }
 
@@ -106,7 +106,7 @@ const TabOneScreen = ({ navigation }: Props) => {
       await Auth.signIn(form.username, form.password);
       setForm(initialForm);
 
-      navigation.navigate('Main');
+      navigation.replace('Root');
     } catch (e) {
       console.log(e);
     } finally {
@@ -221,4 +221,4 @@ const TabOneScreen = ({ navigation }: Props) => {
   );
 };
 
-export default TabOneScreen;
+export default AuthScreen;

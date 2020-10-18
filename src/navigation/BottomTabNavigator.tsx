@@ -5,9 +5,8 @@ import * as React from 'react';
 
 import Colors from '../constants/Colors';
 import useColorScheme from '../hooks/useColorScheme';
-import TabOneScreen from '../screens/TabOneScreen';
-import TabTwoScreen from '../screens/TabTwoScreen';
-import { BottomTabParamList, TabOneParamList, TabTwoParamList } from '../../types';
+import MainScreen from '../screens/MainScreen';
+import { BottomTabParamList, MainParamList } from '../types';
 
 const BottomTab = createBottomTabNavigator<BottomTabParamList>();
 
@@ -20,18 +19,25 @@ export default function BottomTabNavigator() {
 
   return (
     <BottomTab.Navigator
-      initialRouteName="Auth"
+      initialRouteName="Main"
       tabBarOptions={{ activeTintColor: Colors[colorScheme].tint }}
     >
       <BottomTab.Screen
-        name="Auth"
-        component={TabOneNavigator}
+        name="Main"
+        component={TabTwoNavigator}
         options={{
           tabBarIcon: ({ color }: Props) => <TabBarIcon name="ios-code" color={color} />
         }}
       />
       <BottomTab.Screen
-        name="Main"
+        name="History"
+        component={TabTwoNavigator}
+        options={{
+          tabBarIcon: ({ color }: Props) => <TabBarIcon name="ios-code" color={color} />
+        }}
+      />
+      <BottomTab.Screen
+        name="Settings"
         component={TabTwoNavigator}
         options={{
           tabBarIcon: ({ color }: Props) => <TabBarIcon name="ios-code" color={color} />
@@ -47,32 +53,16 @@ function TabBarIcon({ name, color }: { name: string; color: string }) {
   return <Ionicons size={30} style={{ marginBottom: -3 }} name={name} color={color} />;
 }
 
-// Each tab has its own navigation stack, you can read more about this pattern here:
-// https://reactnavigation.org/docs/tab-based-navigation#a-stack-navigator-for-each-tab
-const TabOneStack = createStackNavigator<TabOneParamList>();
-
-function TabOneNavigator() {
-  return (
-    <TabOneStack.Navigator>
-      <TabOneStack.Screen
-        name="TabOneScreen"
-        component={TabOneScreen}
-        options={{ headerTitle: 'Authentication' }}
-      />
-    </TabOneStack.Navigator>
-  );
-}
-
-const TabTwoStack = createStackNavigator<TabTwoParamList>();
+const MainStack = createStackNavigator<MainParamList>();
 
 function TabTwoNavigator() {
   return (
-    <TabTwoStack.Navigator>
-      <TabTwoStack.Screen
-        name="TabTwoScreen"
-        component={TabTwoScreen}
+    <MainStack.Navigator>
+      <MainStack.Screen
+        name="MainScreen"
+        component={MainScreen}
         options={{ headerTitle: 'Authenticated' }}
       />
-    </TabTwoStack.Navigator>
+    </MainStack.Navigator>
   );
 }

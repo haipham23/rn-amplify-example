@@ -13,7 +13,7 @@ interface Props {
   navigation: any;
 }
 
-const TabTwoScreen = ({ navigation }: Props) => {
+const MainScreen = ({ navigation }: Props) => {
   const [formState, setFormState] = React.useState<string>(FormStates.empty);
 
   const onScreenFocus = React.useCallback(() => {
@@ -88,4 +88,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default TabTwoScreen;
+export default MainScreen;
