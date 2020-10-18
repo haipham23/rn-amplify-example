@@ -19,7 +19,7 @@
   "rules": {
     "comma-dangle": ["error", "never"],
     "no-use-before-define": "off",
-    "react/jsx-filename-extension": [1, { "extensions": [".tsx", ".ts"] }],
+    "react/jsx-filename-extension": [1, { "extensions": [".tsx", "js"] }],
     "@typescript-eslint/explicit-module-boundary-types": "off",
     "import/extensions": [
       "error",

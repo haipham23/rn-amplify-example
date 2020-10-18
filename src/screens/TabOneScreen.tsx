@@ -91,80 +91,64 @@ const TabOneScreen = ({ navigation }: Props) => {
     try {
       setFormState('loading');
       await Auth.signIn(form.username, form.password);
-      setFormState('main');
+      setForm(initialForm);
+
+      navigation.navigate('TabTwo');
     } catch (e) {
       console.log(e);
-      setFormState('login');
     } finally {
-      setForm(initialForm);
+      setFormState('login');
     }
   };
 
-  if (formState === 'register') {
-    return (
-      <Container>
-        <Register
-          username={form.username}
-          email={form.email}
-          password={form.password}
-          updateUsername={updateForm('username')}
-          updateEmail={updateForm('email')}
-          updatePassword={updateForm('password')}
-          signUp={signUp}
-        />
-        <AuthOptions
-          currentFormState={formState}
-          showRegister={setFormStateTo('register')}
-          showLogin={setFormStateTo('login')}
-          showResendEmail={setFormStateTo('resendEmail')}
-          showForgetPassword={setFormStateTo('forgetPassword')}
-        />
-      </Container>
-    );
+  if (formState === 'loading') {
+    return <Loader />;
   }
 
-  if (formState === 'confirm') {
-    return (
-      <Container>
-        <Confirmation
-          email={form.email}
-          confirmCode={form.confirmCode}
-          updateConfirmCode={updateForm('confirmCode')}
-          confirm={confirmSignUp}
-        />
-        <AuthOptions
-          currentFormState={formState}
-          showRegister={setFormStateTo('register')}
-          showLogin={setFormStateTo('login')}
-          showResendEmail={setFormStateTo('resendEmail')}
-          showForgetPassword={setFormStateTo('forgetPassword')}
-        />
-      </Container>
-    );
-  }
-
-  if (formState === 'login') {
-    return (
-      <Container>
-        <Login
-          username={form.username}
-          password={form.password}
-          updateUsername={updateForm('username')}
-          updatePassword={updateForm('password')}
-          login={login}
-        />
-        <AuthOptions
-          currentFormState={formState}
-          showRegister={setFormStateTo('register')}
-          showLogin={setFormStateTo('login')}
-          showResendEmail={setFormStateTo('resendEmail')}
-          showForgetPassword={setFormStateTo('forgetPassword')}
-        />
-      </Container>
-    );
-  }
-
-  return <Loader />;
+  return (
+    <Container>
+      {
+        formState === 'register' && (
+          <Register
+            username={form.username}
+            email={form.email}
+            password={form.password}
+            updateUsername={updateForm('username')}
+            updateEmail={updateForm('email')}
+            updatePassword={updateForm('password')}
+            signUp={signUp}
+          />
+        )
+      }
+      {
+        formState === 'confirm' && (
+          <Confirmation
+            email={form.email}
+            confirmCode={form.confirmCode}
+            updateConfirmCode={updateForm('confirmCode')}
+            confirm={confirmSignUp}
+          />
+        )
+      }
+      {
+        formState === 'login' && (
+          <Login
+            username={form.username}
+            password={form.password}
+            updateUsername={updateForm('username')}
+            updatePassword={updateForm('password')}
+            login={login}
+          />
+        )
+      }
+      <AuthOptions
+        currentFormState={formState}
+        showRegister={setFormStateTo('register')}
+        showLogin={setFormStateTo('login')}
+        showForgetPassword={setFormStateTo('forgetPassword')}
+      />
+    </Container>
+  );
 };
 
 export default TabOneScreen;

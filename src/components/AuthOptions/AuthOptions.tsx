@@ -6,16 +6,14 @@ interface Props {
   currentFormState: string,
   showRegister(): void,
   showLogin(): void,
-  showForgetPassword(): void,
-  showResendEmail(): void,
+  showForgetPassword(): void
 }
 
 const AuthOptions = ({
   currentFormState,
   showRegister,
   showLogin,
-  showForgetPassword,
-  showResendEmail
+  showForgetPassword
 }: Props) => (
   <View style={styles.content}>
     {
@@ -36,13 +34,6 @@ const AuthOptions = ({
       currentFormState !== 'forgetPassword' && (
         <Button transparent onPress={showForgetPassword}>
           <Text>Forget your password?</Text>
-        </Button>
-      )
-    }
-    {
-      currentFormState !== 'resendEmail' && (
-        <Button transparent onPress={showResendEmail}>
-          <Text>Resend confirmation code.</Text>
         </Button>
       )
     }

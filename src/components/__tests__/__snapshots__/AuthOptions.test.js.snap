@@ -1,0 +1,120 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`AuthOptions component should render 1`] = `
+<View
+  style={
+    Object {
+      "padding": 10,
+    }
+  }
+>
+  <View
+    accessible={true}
+    focusable={true}
+    forwardedRef={[Function]}
+    onClick={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    style={
+      Object {
+        "alignItems": "center",
+        "backgroundColor": "transparent",
+        "borderBottomWidth": null,
+        "borderColor": "#007aff",
+        "borderLeftWidth": null,
+        "borderRadius": 5,
+        "borderRightWidth": null,
+        "borderTopWidth": null,
+        "borderWidth": undefined,
+        "elevation": 0,
+        "flexDirection": "row",
+        "height": 45,
+        "justifyContent": "space-between",
+        "opacity": 1,
+        "paddingBottom": 6,
+        "paddingTop": 6,
+        "shadowColor": null,
+        "shadowOffset": null,
+        "shadowOpacity": null,
+        "shadowRadius": null,
+      }
+    }
+  >
+    <Text
+      style={
+        Object {
+          "backgroundColor": "transparent",
+          "color": "#007aff",
+          "fontFamily": "System",
+          "fontSize": 16.5,
+          "marginLeft": 0,
+          "marginRight": 0,
+          "paddingLeft": 16,
+          "paddingRight": 16,
+        }
+      }
+      uppercase={false}
+    >
+      Login
+    </Text>
+  </View>
+  <View
+    accessible={true}
+    focusable={true}
+    forwardedRef={[Function]}
+    onClick={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    style={
+      Object {
+        "alignItems": "center",
+        "backgroundColor": "transparent",
+        "borderBottomWidth": null,
+        "borderColor": "#007aff",
+        "borderLeftWidth": null,
+        "borderRadius": 5,
+        "borderRightWidth": null,
+        "borderTopWidth": null,
+        "borderWidth": undefined,
+        "elevation": 0,
+        "flexDirection": "row",
+        "height": 45,
+        "justifyContent": "space-between",
+        "opacity": 1,
+        "paddingBottom": 6,
+        "paddingTop": 6,
+        "shadowColor": null,
+        "shadowOffset": null,
+        "shadowOpacity": null,
+        "shadowRadius": null,
+      }
+    }
+  >
+    <Text
+      style={
+        Object {
+          "backgroundColor": "transparent",
+          "color": "#007aff",
+          "fontFamily": "System",
+          "fontSize": 16.5,
+          "marginLeft": 0,
+          "marginRight": 0,
+          "paddingLeft": 16,
+          "paddingRight": 16,
+        }
+      }
+      uppercase={false}
+    >
+      Forget your password?
+    </Text>
+  </View>
+</View>
+`;
