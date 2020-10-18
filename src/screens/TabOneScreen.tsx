@@ -1,6 +1,7 @@
 import * as React from 'react';
 import Auth from '@aws-amplify/auth';
 import { Container } from 'native-base';
+import { useFocusEffect } from '@react-navigation/native';
 
 import Register from '../components/Register';
 import Confirmation from '../components/Confirmation';
@@ -28,10 +29,12 @@ const initialForm = {
 
 const TabOneScreen = ({ navigation }: Props) => {
   const [form, setForm] = React.useState<IForm>(initialForm);
-  const [formState, setFormState] = React.useState<string>('loading');
+  const [formState, setFormState] = React.useState<string>('empty');
 
-  React.useEffect(() => {
+  const onScreenFocus = React.useCallback(() => {
     const navigateIfAuth = async () => {
+      setFormState('loading');
+
       try {
         const user = await Auth.currentAuthenticatedUser();
 
@@ -49,7 +52,7 @@ const TabOneScreen = ({ navigation }: Props) => {
 
     navigateIfAuth();
 
-    return () => setFormState('login');
+    return () => setFormState('empty');
   }, []);
 
   const updateForm = (key: string) => (text: string) => setForm({ ...form, [key]: text });
@@ -100,6 +103,12 @@ const TabOneScreen = ({ navigation }: Props) => {
       setFormState('login');
     }
   };
+
+  useFocusEffect(onScreenFocus);
+
+  if (formState === 'empty') {
+    return null;
+  }
 
   if (formState === 'loading') {
     return <Loader />;

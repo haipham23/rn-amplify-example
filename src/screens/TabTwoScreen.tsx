@@ -2,14 +2,42 @@ import * as React from 'react';
 import { StyleSheet } from 'react-native';
 import { Button, Text } from 'native-base';
 import Auth from '@aws-amplify/auth';
+import { useFocusEffect } from '@react-navigation/native';
 
 import { View } from '../components/Themed';
+import Loader from '../components/Loader';
 
 interface Props {
   navigation: any;
 }
 
 const TabTwoScreen = ({ navigation }: Props) => {
+  const [formState, setFormState] = React.useState<string>('empty');
+
+  const onScreenFocus = React.useCallback(() => {
+    const navigateIfAuth = async () => {
+      setFormState('loading');
+
+      try {
+        const user = await Auth.currentAuthenticatedUser();
+
+        if (!user) {
+          navigation.navigate('TabOne');
+          return;
+        }
+
+        setFormState('active');
+      } catch (e) {
+        // logged out
+        navigation.navigate('TabOne');
+      }
+    };
+
+    navigateIfAuth();
+
+    return () => setFormState('empty');
+  }, []);
+
   const logout = async () => {
     try {
       await Auth.signOut();
@@ -19,6 +47,16 @@ const TabTwoScreen = ({ navigation }: Props) => {
       navigation.navigate('TabOne');
     }
   };
+
+  useFocusEffect(onScreenFocus);
+
+  if (formState === 'empty') {
+    return null;
+  }
+
+  if (formState === 'loading') {
+    return <Loader />;
+  }
 
   return (
     <View style={styles.container}>
