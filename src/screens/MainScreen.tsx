@@ -2,44 +2,14 @@ import * as React from 'react';
 import { StyleSheet } from 'react-native';
 import { Button, Text } from 'native-base';
 import Auth from '@aws-amplify/auth';
-import { useFocusEffect } from '@react-navigation/native';
 
 import { View } from '../components/Themed';
-import Loader from '../components/Loader';
-
-import FormStates from '../constants/FormStates';
 
 interface Props {
   navigation: any;
 }
 
 const MainScreen = ({ navigation }: Props) => {
-  const [formState, setFormState] = React.useState<string>(FormStates.empty);
-
-  const onScreenFocus = React.useCallback(() => {
-    const navigateIfAuth = async () => {
-      setFormState(FormStates.loading);
-
-      try {
-        const user = await Auth.currentAuthenticatedUser();
-
-        if (!user) {
-          navigation.navigate('Auth');
-          return;
-        }
-
-        setFormState(FormStates.active);
-      } catch (e) {
-        // logged out
-        navigation.navigate('Auth');
-      }
-    };
-
-    navigateIfAuth();
-
-    return () => setFormState(FormStates.empty);
-  }, []);
-
   const logout = async () => {
     try {
       await Auth.signOut();
@@ -49,16 +19,6 @@ const MainScreen = ({ navigation }: Props) => {
       navigation.navigate('Auth');
     }
   };
-
-  useFocusEffect(onScreenFocus);
-
-  if (formState === FormStates.empty) {
-    return null;
-  }
-
-  if (formState === FormStates.login) {
-    return <Loader />;
-  }
 
   return (
     <View style={styles.container}>

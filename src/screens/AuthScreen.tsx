@@ -1,7 +1,6 @@
 import * as React from 'react';
 import Auth from '@aws-amplify/auth';
 import { Container } from 'native-base';
-import { useFocusEffect } from '@react-navigation/native';
 
 import Register from '../components/Register';
 import Confirmation from '../components/Confirmation';
@@ -37,31 +36,7 @@ const initialForm = {
 
 const AuthScreen = ({ navigation }: Props) => {
   const [form, setForm] = React.useState<IForm>(initialForm);
-  const [formState, setFormState] = React.useState<string>('empty');
-
-  const onScreenFocus = React.useCallback(() => {
-    const navigateIfAuth = async () => {
-      setFormState(FormStates.loading);
-
-      try {
-        const user = await Auth.currentAuthenticatedUser();
-
-        if (user) {
-          navigation.replace('Root');
-          return;
-        }
-
-        setFormState(FormStates.register);
-      } catch (e) {
-        // logged out
-        setFormState(FormStates.login);
-      }
-    };
-
-    navigateIfAuth();
-
-    return () => setFormState(FormStates.empty);
-  }, []);
+  const [formState, setFormState] = React.useState<string>(FormStates.login);
 
   const updateForm = (key: string) => (text: string) => setForm({ ...form, [key]: text });
 
@@ -143,8 +118,6 @@ const AuthScreen = ({ navigation }: Props) => {
       setFormState(FormStates.forgotPassword);
     }
   };
-
-  useFocusEffect(onScreenFocus);
 
   if (formState === FormStates.empty) {
     return null;

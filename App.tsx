@@ -16,7 +16,7 @@ LogBox.ignoreLogs([
 ]);
 
 export default function App() {
-  const isLoadingComplete = useCachedResources();
+  const { isLoadingComplete, user } = useCachedResources();
   const colorScheme = useColorScheme();
 
   if (!isLoadingComplete) {
@@ -25,7 +25,7 @@ export default function App() {
 
   return (
     <SafeAreaProvider>
-      <Navigation colorScheme={colorScheme} />
+      <Navigation colorScheme={colorScheme} user={user} />
       <StatusBar />
     </SafeAreaProvider>
   );
