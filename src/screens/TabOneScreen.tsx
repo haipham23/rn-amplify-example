@@ -8,12 +8,18 @@ import Confirmation from '../components/Confirmation';
 import Login from '../components/Login';
 import Loader from '../components/Loader';
 import AuthOptions from '../components/AuthOptions';
+import ForgotPassword from '../components/ForgotPassword';
+import SubmitNewPassword from '../components/SubmitNewPassword';
+
+import FormStates from '../constants/FormStates';
 
 interface IForm {
   username: string,
   email: string;
   password: string;
   confirmCode: string;
+  forgotCode: string;
+  newPassword: string;
 }
 
 interface Props {
@@ -24,7 +30,9 @@ const initialForm = {
   username: '',
   email: '',
   password: '',
-  confirmCode: ''
+  confirmCode: '',
+  forgotCode: '',
+  newPassword: ''
 };
 
 const TabOneScreen = ({ navigation }: Props) => {
@@ -33,7 +41,7 @@ const TabOneScreen = ({ navigation }: Props) => {
 
   const onScreenFocus = React.useCallback(() => {
     const navigateIfAuth = async () => {
-      setFormState('loading');
+      setFormState(FormStates.loading);
 
       try {
         const user = await Auth.currentAuthenticatedUser();
@@ -43,16 +51,16 @@ const TabOneScreen = ({ navigation }: Props) => {
           return;
         }
 
-        setFormState('register');
+        setFormState(FormStates.register);
       } catch (e) {
         // logged out
-        setFormState('login');
+        setFormState(FormStates.login);
       }
     };
 
     navigateIfAuth();
 
-    return () => setFormState('empty');
+    return () => setFormState(FormStates.empty);
   }, []);
 
   const updateForm = (key: string) => (text: string) => setForm({ ...form, [key]: text });
@@ -60,7 +68,7 @@ const TabOneScreen = ({ navigation }: Props) => {
   const setFormStateTo = (key: string) => () => setFormState(key);
 
   const signUp = async () => {
-    setFormState('loading');
+    setFormState(FormStates.loading);
 
     try {
       await Auth.signUp({
@@ -70,29 +78,31 @@ const TabOneScreen = ({ navigation }: Props) => {
           email: form.email
         }
       });
-      setFormState('confirm');
+      setFormState(FormStates.confirm);
     } catch (e) {
       console.log(e);
-      setFormState('register');
+      setFormState(FormStates.register);
     }
   };
 
   const confirmSignUp = async () => {
+    setFormState(FormStates.loading);
+
     try {
-      setFormState('loading');
       await Auth.confirmSignUp(form.username, form.confirmCode);
-      setFormState('login');
+      setFormState(FormStates.login);
     } catch (e) {
       console.log(e);
-      setFormState('register');
+      setFormState(FormStates.register);
     } finally {
       setForm(initialForm);
     }
   };
 
   const login = async () => {
+    setFormState(FormStates.loading);
+
     try {
-      setFormState('loading');
       await Auth.signIn(form.username, form.password);
       setForm(initialForm);
 
@@ -100,24 +110,54 @@ const TabOneScreen = ({ navigation }: Props) => {
     } catch (e) {
       console.log(e);
     } finally {
+      setFormState(FormStates.login);
+    }
+  };
+
+  const sendForgotCode = async () => {
+    setFormState(FormStates.loading);
+
+    try {
+      await Auth.forgotPassword(form.username);
+      setFormState(FormStates.newPassword);
+    } catch (e) {
+      console.log(e);
+      setFormState(FormStates.forgotPassword);
+    }
+  };
+
+  const submitNewPassword = async () => {
+    setFormState(FormStates.loading);
+
+    try {
+      await Auth.forgotPasswordSubmit(
+        form.username,
+        form.forgotCode,
+        form.newPassword
+      );
+
+      setForm(initialForm);
       setFormState('login');
+    } catch (e) {
+      console.log(e);
+      setFormState(FormStates.forgotPassword);
     }
   };
 
   useFocusEffect(onScreenFocus);
 
-  if (formState === 'empty') {
+  if (formState === FormStates.empty) {
     return null;
   }
 
-  if (formState === 'loading') {
+  if (formState === FormStates.loading) {
     return <Loader />;
   }
 
   return (
     <Container>
       {
-        formState === 'register' && (
+        formState === FormStates.register && (
           <Register
             username={form.username}
             email={form.email}
@@ -130,7 +170,7 @@ const TabOneScreen = ({ navigation }: Props) => {
         )
       }
       {
-        formState === 'confirm' && (
+        formState === FormStates.confirm && (
           <Confirmation
             email={form.email}
             confirmCode={form.confirmCode}
@@ -140,7 +180,7 @@ const TabOneScreen = ({ navigation }: Props) => {
         )
       }
       {
-        formState === 'login' && (
+        formState === FormStates.login && (
           <Login
             username={form.username}
             password={form.password}
@@ -150,11 +190,32 @@ const TabOneScreen = ({ navigation }: Props) => {
           />
         )
       }
+      {
+        formState === FormStates.forgotPassword && (
+          <ForgotPassword
+            username={form.username}
+            updateUsername={updateForm('username')}
+            sendForgotCode={sendForgotCode}
+          />
+        )
+      }
+      {
+        formState === FormStates.newPassword && (
+          <SubmitNewPassword
+            username={form.username}
+            forgotCode={form.forgotCode}
+            newPassword={form.newPassword}
+            updateForgotCode={updateForm('forgotCode')}
+            updateNewPassword={updateForm('newPassword')}
+            submitNewPassword={submitNewPassword}
+          />
+        )
+      }
       <AuthOptions
         currentFormState={formState}
-        showRegister={setFormStateTo('register')}
-        showLogin={setFormStateTo('login')}
-        showForgetPassword={setFormStateTo('forgetPassword')}
+        showRegister={setFormStateTo(FormStates.register)}
+        showLogin={setFormStateTo(FormStates.login)}
+        showForgetPassword={setFormStateTo(FormStates.forgotPassword)}
       />
     </Container>
   );
